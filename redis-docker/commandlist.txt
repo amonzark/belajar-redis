@@ -1,0 +1,40 @@
+--------------------------------------------------------------------------------
+Command             | Details                       | Example               | Result
+--------------------------------------------------------------------------------
+select db           | move db (db redis only number)| select 0              | "OK" and move to db 0
+set key value       | set value                     | set cek1 "check"      | "OK" value set
+get key             | get value                     | get cek1              | "check" 
+exists key          | checking if key is exist      | exists cek1           | "0 or 1"
+del key [key]       | delete a key                  | del cek1              | "0 or 1"
+append key value    | append a value key            | append cek1 " test"   | "check test"
+keys pattern        | using regex to command        | keys cek*             | "cek1" "cek2"
+
+setrange key offset value   | set key in index x            | setrange cek1 0 chuck
+getrange key start end      | get key from index x to x     | getrange cek1 2 5
+
+Expire
+expire key seconds          | set expire time of keys       | expire cek1 60 
+setex key seconds value     | set value and expire time     | setex cek1 60 "testing"
+ttl key                     | get time the expire           | ttl cek1
+
+Flush
+flushdb     | remove all keys from current db   | flushdb
+flushall    | remove all keys from all db       | flushall
+
+monitor     | monitoring all event in redis
+
+docker-compose -f docker-compose.yaml up -d
+
+docker exec -it redis /bin/sh
+
+redis-cli -h localhost
+
+docker push amonzark/redis:7.2
+
+
+-----
+kubectl create deploy redis --image=amonzark/redis:7.2
+
+kubectl expose deploy redis --port=6379
+
+kubectl port-forward service/redis 6379:6379 

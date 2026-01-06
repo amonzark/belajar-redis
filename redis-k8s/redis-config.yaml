@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+data:
+  redis.conf: |
+    maxmemory 2mb
+    timeout 600
+    databases 1
+    protected-mode no
+    port 6379
